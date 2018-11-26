@@ -10,18 +10,31 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "module": "commonjs",
+    "module": "esnext",
     "target": "esnext",
-    "jsx": "react",
-    "lib": ["dom", "esnext"],
-    "types" : ["node"],
-    "baseUrl" : "./",
-    "paths": {
-      "*" : ["./node_modules/@types/*", "*"]
-    }
+    "jsx": "preserve",
+    "experimentalDecorators": true,
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "types": [
+      "node"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./src/packages"
   ],
   "exclude": [
     "node_modules"
