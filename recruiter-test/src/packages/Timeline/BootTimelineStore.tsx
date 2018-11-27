@@ -1,42 +1,42 @@
-import {action, computed, decorate, observable} from "mobx";
+import {action, computed, observable} from "mobx";
 
 export class BootTimelineStore {
-    valueMax = 100;
-    valueCurrent = 25;
-    progressLabel = '%';
-    barColor = '';
-    barSize = 20;
+    @observable valueMax = 100;
+    @observable valueCurrent = 25;
+    @observable progressLabel = '%';
+    @observable barColor = '';
+    @observable barSize = 20;
+    @observable counter = 0;
 
-    resetProgressBar() {
+    constructor () {
+        window.setInterval(() => this.counter++, 500);
+    }
+
+    @action resetProgressBar() {
         this.valueCurrent = 0;
     }
 
+    @action incrementProgressBar() {
+        this.valueCurrent++;
+    }
+    @action decrementProgressBar() {
+        this.valueCurrent--;
+    }
     // valueMax getter and setter.
-    setValueMax(value: number) {
+    @action setValueMax(value: number) {
         this.valueMax = value;
     }
-    get getValueMax() {
+    @computed get getValueMax() {
         return this.valueMax;
     }
 
     // valueCurrent getter and setter.
-    setValueCurrent(value: number) {
+    @action setValueCurrent(value: number) {
         this.valueCurrent = value;
     }
-    get getValueCurrent() {
+    @computed get getValueCurrent() {
         return this.valueCurrent;
     }
 }
 
-decorate(BootTimelineStore, {
-    valueMax: observable,
-    valueCurrent: observable,
-    progressLabel: observable,
-    barColor: observable,
-    barSize: observable,
-    resetProgressBar: action,
-    setValueCurrent: action,
-    getValueCurrent: computed,
-    setValueMax: action,
-    getValueMax: computed,
-});
+export default new BootTimelineStore();

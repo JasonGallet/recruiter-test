@@ -4,16 +4,11 @@ import {BootTimelineStore} from "./packages/Timeline/BootTimelineStore";
 
 const btStore = new BootTimelineStore();
 
-
 class App extends Component {
-  state = {
-    valueCurrent: 0,
-  };
-
   render() {
     return (
       <div className="App">
-        <BootTimelineContainer valueCurrent={this.state.valueCurrent}/>
+        <BootTimelineContainer store={ btStore }/>
       </div>
     );
   }
