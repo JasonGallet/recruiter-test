@@ -5,12 +5,12 @@ import BootTimelineController from './packages/Timeline/Controller/BootTimelineC
 class App extends Component {
   render() {
     const btController = new BootTimelineController();
-    btController.setBtBarColor('green');
-    btController.setBtValueCurrentOnValueMax(false);
-    btController.setBtValueCurrent(25);
+    // btController.setBtBarColor('green');
+    // btController.setBtValueCurrentOnValueMax(false);
+    // btController.setBtValueCurrent(25);
     return (
       <div className="App">
-        <BootTimelineContainer store={ btController.getBtStore() } service={btController.getBtService()}/>
+        <BootTimelineContainer store={ btController.getBtStore() } service={ btController.getBtService() }/>
       </div>
     );
   }

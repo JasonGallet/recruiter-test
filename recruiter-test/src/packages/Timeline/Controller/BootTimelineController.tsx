@@ -1,4 +1,3 @@
-// This is where all the business logic is done.
 import { BootTimelineStore } from '../BootTimelineStore';
 import BootTimelineService from '../BootTimelineService';
 
@@ -14,7 +13,6 @@ class BootTimelineController {
     getBtStore() {
         return this.btStore;
     }
-
     getBtService() {
         return this.btService;
     }
@@ -24,14 +22,12 @@ class BootTimelineController {
             this.btStore.setValueCurrent(valueCurrent);
         }
     }
-
     setBtBarColor(barColor: string) {
         if (null != this.btStore && null != this.btService) {
             let color = this.btService.getBtBarColor(barColor);
             this.btStore.setBarColor(color);
         }
     }
-
     setBtValueCurrentOnValueMax(valueCurrentOnValueMax: boolean) {
         if (null != this.btStore) {
             this.btStore.setValueCurrentOnValueMax(valueCurrentOnValueMax);
