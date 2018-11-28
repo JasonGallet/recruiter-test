@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import store from '../BootTimelineStore';
 import {Progress} from "reactstrap";
-import {getBarColor} from "../BootTimelineService";
 
 @observer
 class BootTimelineContainer extends Component {
+    private store: any;
+
     constructor(props: any) {
         super(props);
+        this.store = props.store;
     }
 
+    handleIncrementBar = (store: any) => {
+        store.incrementProgressBar(store);
+    };
+
+    handleDecrementBar = (store: any) => {
+        store.decrementProgressBar(store);
+    };
+
     public render() {
+        // @ts-ignore
         return (
             <div>
-                // @ts-ignore
-                <button onClick={store.incrementProgressBar}> + </button>
-                <button onClick={store.decrementProgressBar}> - </button>
-                <div className="btComponent" style={{height: store.barSize}}>
-
-                    <Progress bar className={`progress-bar ${store.barColor != '' ? getBarColor(store.barColor) : "bg-info"}`} value={store.valueCurrent} max={store.valueMax}>
-                        {store.valueCurrent} {store.progressLabel}
+                <button onClick={() => this.handleIncrementBar(this.store)}> + </button>
+                <button onClick={() => this.handleDecrementBar(this.store)}> - </button>
+                <div className="btComponent" style={{height: this.store.barSize, width: '100%'}}>
+                    <Progress bar className={`${this.store.barColor != '' ? this.store.barColor : "bg-info"}`} value={this.store.valueCurrent} max={this.store.valueMax}>
+                        {this.store.progressLabelPrev} {this.store.valueCurrent} {this.store.valueCurrentOnValueMax ? '/ ' + this.store.valueMax : ''} {this.store.progressLabelPost}
                     </Progress>
                 </div>
-                { store.counter }
             </div>
         );
     }

@@ -1,41 +1,54 @@
 import {action, computed, observable} from "mobx";
 
-export class BootTimelineStore {
+export class BootTimelineStore{
     @observable valueMax = 100;
     @observable valueCurrent = 25;
-    @observable progressLabel = '%';
+    @observable progressLabelPost = '';
+    @observable progressLabelPrev = 'Question';
     @observable barColor = '';
     @observable barSize = 20;
     @observable counter = 0;
-
-    constructor () {
-        window.setInterval(() => this.counter++, 500);
-    }
+    @observable valueCurrentOnValueMax = false;
 
     @action resetProgressBar() {
         this.valueCurrent = 0;
     }
 
-    @action incrementProgressBar() {
-        this.valueCurrent++;
+    @action incrementProgressBar(store: any) {
+        return store.valueCurrent++;
     }
-    @action decrementProgressBar() {
-        this.valueCurrent--;
+    @action decrementProgressBar(store: any) {
+        return store.valueCurrent--;
     }
-    // valueMax getter and setter.
+
+    // GETTERS AND SETTERS
+    // valueMax.
     @action setValueMax(value: number) {
         this.valueMax = value;
     }
     @computed get getValueMax() {
         return this.valueMax;
     }
-
-    // valueCurrent getter and setter.
+    // valueCurrent.
     @action setValueCurrent(value: number) {
         this.valueCurrent = value;
     }
     @computed get getValueCurrent() {
         return this.valueCurrent;
+    }
+    // barColor.
+    @action setBarColor(value: string) {
+        this.barColor = value;
+    }
+    @computed get getBarColor() {
+        return this.barColor;
+    }
+    // valueCurrentOnValueMax.
+    @action setValueCurrentOnValueMax(valueCurrentOnValueMax: boolean) {
+        this.valueCurrentOnValueMax = valueCurrentOnValueMax;
+    }
+    @computed get getValueCurrentOnValueMax() {
+        return this.valueCurrentOnValueMax;
     }
 }
 
