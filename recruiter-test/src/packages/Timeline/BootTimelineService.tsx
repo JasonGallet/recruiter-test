@@ -17,7 +17,6 @@ class BootTimelineService {
                 barColor = 'bg-danger';
                 break;
             default:
-                console.log(color);
                 throw TypeError('You must choose between these colors: blue, green, yellow, red. It must be a characters chain.');
         }
 
