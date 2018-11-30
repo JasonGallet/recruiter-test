@@ -8,3 +8,4 @@ This module is using :
 * React
 * Mobx
 * Mobx-React
+* React-autobind
