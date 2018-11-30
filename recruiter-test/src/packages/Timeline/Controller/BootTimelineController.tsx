@@ -1,11 +1,18 @@
 import { BootTimelineStore } from '../BootTimelineStore';
 import BootTimelineService from '../BootTimelineService';
+import { Component } from "react";
+import BootTimelineContainer from "../Containers/BootTimelineContainer";
+import React from "react";
+// @ts-ignore
+import autoBind from 'react-autobind';
 
-class BootTimelineController {
+class BootTimelineController extends Component {
     private btStore: any;
     private btService: any;
 
-    constructor() {
+    constructor(props: any) {
+        super(props);
+        autoBind(this);
         this.btStore = new BootTimelineStore();
         this.btService = new BootTimelineService();
     }
@@ -18,20 +25,32 @@ class BootTimelineController {
     }
 
     setBtValueCurrent(valueCurrent: number) {
-        if (null != this.btStore) {
-            this.btStore.setValueCurrent(valueCurrent);
-        }
+        this.btStore.setValueCurrent(valueCurrent);
     }
     setBtBarColor(barColor: string) {
-        if (null != this.btStore && null != this.btService) {
-            let color = this.btService.getBtBarColor(barColor);
-            this.btStore.setBarColor(color);
-        }
+        let color = this.btService.getBtBarColor(barColor);
+        this.btStore.setBarColor(color);
     }
     setBtValueCurrentOnValueMax(valueCurrentOnValueMax: boolean) {
-        if (null != this.btStore) {
-            this.btStore.setValueCurrentOnValueMax(valueCurrentOnValueMax);
+        this.btStore.setValueCurrentOnValueMax(valueCurrentOnValueMax);
+    }
+    setBtValueMax(valueMax: number) {
+        this.btStore.setValueMax(valueMax);
+    }
+    incrementBtLine() {
+        if (this.btStore.valueCurrent < this.btStore.valueMax) {
+            this.btStore.incrementProgressBar();
         }
+    }
+    decrementBtLine() {
+        if (this.btStore.valueCurrent > this.btStore.valueMin) {
+            this.btStore.decrementProgressBar();
+        }
+    }
+    public render() {
+        return (
+            <BootTimelineContainer store={ this.btStore } service={ this.btService }/>
+        );
     }
 }
 

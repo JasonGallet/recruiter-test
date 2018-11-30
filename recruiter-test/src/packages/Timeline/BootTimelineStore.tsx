@@ -2,6 +2,7 @@ import {action, computed, observable} from "mobx";
 
 export class BootTimelineStore{
     @observable valueMax = 100;
+    @observable valueMin = 0;
     @observable valueCurrent = 25;
     @observable progressLabelPost = '';
     @observable progressLabelPrev = 'Question';
@@ -9,16 +10,17 @@ export class BootTimelineStore{
     @observable barSize = 20;
     @observable counter = 0;
     @observable valueCurrentOnValueMax = false;
+    @observable btHidden = false;
 
     @action resetProgressBar() {
         this.valueCurrent = 0;
     }
 
-    @action incrementProgressBar(store: any) {
-        return store.valueCurrent++;
+    @action incrementProgressBar() {
+        this.valueCurrent = this.valueCurrent + 1;
     }
-    @action decrementProgressBar(store: any) {
-        return store.valueCurrent--;
+    @action decrementProgressBar() {
+        this.valueCurrent = this.valueCurrent - 1;
     }
 
     // GETTERS AND SETTERS
@@ -49,6 +51,13 @@ export class BootTimelineStore{
     }
     @computed get getValueCurrentOnValueMax() {
         return this.valueCurrentOnValueMax;
+    }
+    // btHidden.
+    @action setBtHidden(hidden: boolean) {
+        this.btHidden = hidden;
+    }
+    @computed get getBtHidden() {
+        return this.btHidden;
     }
 }
 
