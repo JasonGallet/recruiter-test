@@ -48,3 +48,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 * Don't use `variables` as html elements renderer as you can `only decorate classes` (with `@observer` for example).
 * Please respect the file architecture, the aim is to develop `independent` but yet `configurable modules`. Those modules aim to have (light) internal dependencies only.
 * Don't forget to add the internal module css file (you can overload it tho).
+* Don't forget the difference between primitive values and references (if a value needs to be updated don't use primitives)
